@@ -1,37 +1,116 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/Blank2275/Bounce/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Blank2275/Bounce/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bounce</title>
+        <script src = "gameobjects.js"></script>
+        <script src = "input.js"></script>
+        <script src = "structure.js"></script>
+        <script src = "main.js"></script>
+    </head>
+    <body onkeydown = "keyDown(event)" onkeyup="keyUp(event);" onresize = "resize()">
+        <style>
+            html, body{
+                height:100%;
+                overflow:hidden;
+            }
+            #main{
+                width:96%;
+                background-color:rgb(0, 10, 20);
+            }
+            #ui{
+                position:absolute;
+                left:55%;
+                width:30%;
+                height:7%;
+                float:left;
+                background-color:rgba(150, 150, 150, 0.7);
+            }
+            #difficulty-select{
+                position:absolute;
+                left:40%;
+                width:59%;
+                height:80%;
+                top:10%;
+                background-color:rgba(0, 0, 0, 0.2);
+            }
+            .dsb{
+                position:relative;
+                float:left;
+                text-align:center;
+                width:23%;
+                height:80%;
+                top:10%;
+                display:inherit;
+                pointer-events:inherit;
+            }
+            .gs{
+                position:relative;
+                float:left;
+                text-align:center;
+                width:20%;
+                height:80%;
+                top:10%;
+                display:inherit;
+                pointer-events:inherit;
+            }
+            #restart{
+                position:absolute;
+                width: 30%;
+                height:15%;
+                left: 35%;
+                top: 52.5%;
+                background-color:green;
+                font-size:500%;
+                float:left;
+            }
+            #difficulty-display{
+                position:relative;
+                color:white;
+                top:10%;
+                left:-40%;
+                float:left;
+            }
+            #gamemode-display{
+                position:relative;
+                color:white;
+                top:10%;
+                left:-30%;
+            }
+            #countdown{
+                position:absolute;
+                left:85%;
+                top:0%;
+                font-size:200%;
+                color:white;
+                display:none;
+            }
+        </style>
+        <div id = "ui">
+            <button id = "home" onclick = "goHome()">Home</button>
+            <div id = "gamemode-select">
+                <button id = "classic" class = "gs" onclick = "setGamemode('Classic')">Classic</button>
+                <button id = "survival" class = "gs" onclick = "setGamemode('Survival')">Survival</button>
+            </div>
+            <div id = "difficulty-select">
+                <button id = "easy" class = "dsb" onclick = "setDifficulty('Easy')">Easy</button>
+                <button id = "normal" class = "dsb" onclick = "setDifficulty('Normal')">Normal</button>
+                <button id = "hard" class = "dsb" onclick = "setDifficulty('Hard')">Hard</button>
+            </div>
+            <p id = "difficulty-display">Normal</p>
+            <p id = "gamemode-display">Classic</p>
+        </div>
+        <button id = "restart" onclick = "restart()">Start</button>
+        <p id = "countdown">60</p>
+        <canvas id = "main" onclick = "">
+        
+        </canvas>
+        <p>
+            <!--
+            WASD to move, space to destroy asteroids (red and yellow circles). red asteroids give 10 points when destroyed and shatter into smaller asteroids
+            golden (yellow) asteroids give 30 points and do not shatter. your shield power is the bar in the upper left which will go down when you hit space
+            and up when you don't, your score is also in the upper left. The green circles with a blue outline are unlimited shield power powerups. green 
+            circles with red outlines are an extra life which will appear in the lower left. The unlimited power bar is in the lower left
+            -->
+        </p>
+    </body>
+</html> 

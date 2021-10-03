@@ -9,6 +9,9 @@ Lower priority
 -Sound Effects
 -Music
 */
+/*
+Fix Going off screen
+*/
 var canvas;
 var ctx;
 const left = 65;
@@ -49,6 +52,17 @@ var powerupDecay = 450;
 var width = 1600;
 var height = 800;
 var increase = width / 300;
+
+var crumbling = new Audio("sounds/crumbling.wav");
+var crumbling2 = new Audio("sounds/crumbling2.wav");
+var crumbling3 = new Audio("sounds/crumbling3.wav");
+var powerup = new Audio("sounds/powerup.wav");
+var gameover = new Audio("sounds/gameover.wav");
+var hit = new Audio("sounds/hit.wav");
+
+var soundEffectsOn = true;
+
+const font = "Pixeboy";
 window.onload = function(){
     resize();
     canvas = document.getElementById("main");
@@ -56,6 +70,10 @@ window.onload = function(){
     canvas.height = 800;
     ctx = canvas.getContext("2d");
     animate();
+    game.joyStickArea = document.getElementById("joystick-area");
+    game.joyStick = document.getElementById("joystick");
+    this.joyStickAreaX = (game.joyStickArea.getBoundingClientRect().left + game.joyStickArea.style.width / 2);
+    showMobile();
 };
 
 function animate(){

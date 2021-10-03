@@ -6,32 +6,40 @@
         <script src = "input.js"></script>
         <script src = "structure.js"></script>
         <script src = "main.js"></script>
+        <link rel = "shortcut icon" src = favicon.ico">
     </head>
-    <body onkeydown = "keyDown(event)" onkeyup="keyUp(event);" onresize = "resize()">
+    <body onkeydown = "keyDown(event)" onkeyup="keyUp(event);" onresize = "resize()" ontouchstart = "mobile(event)">
         <style>
+            @import url('http://fonts.cdnfonts.com/css/pixeboy');
+            :root{
+                --button-edge: rgb(155, 29, 155);
+                --button-main:rgb(50, 51, 68);
+                --button-hover:linear-gradient(to bottom right, rgb(68, 69, 90), rgb(50, 51, 68));
+                --text:rgb(226, 226, 226);
+            }
+            button:hover{
+                background-image:var(--button-hover);
+            }
             html, body{
-                height:100%;
-                overflow:hidden;
+                height:99%;
+                overflow-x:hidden;
+                background-color:rgb(0, 10, 20);
+                font-family: 'Pixeboy', sans-serif;
             }
             #main{
-                width:96%;
+                width:100%;
                 background-color:rgb(0, 10, 20);
+                border:3px solid rgb(23, 21, 48);
             }
             #ui{
                 position:absolute;
-                left:55%;
+                left:2%;
                 width:30%;
-                height:7%;
+                height:10%;
                 float:left;
-                background-color:rgba(150, 150, 150, 0.7);
-            }
-            #difficulty-select{
-                position:absolute;
-                left:40%;
-                width:59%;
-                height:80%;
-                top:10%;
-                background-color:rgba(0, 0, 0, 0.2);
+                background-color:rgba(87, 87, 87, 0);
+                font-family: 'Pixeboy', sans-serif;
+                border-radius:20px;
             }
             .dsb{
                 position:relative;
@@ -42,39 +50,50 @@
                 top:10%;
                 display:inherit;
                 pointer-events:inherit;
+                font-family: 'Pixeboy', sans-serif;
             }
             .gs{
                 position:relative;
                 float:left;
                 text-align:center;
                 width:20%;
-                height:80%;
+                height:140%;
                 top:10%;
                 display:inherit;
                 pointer-events:inherit;
+                font-family: 'Pixeboy', sans-serif;
             }
             #restart{
                 position:absolute;
                 width: 30%;
-                height:15%;
                 left: 35%;
                 top: 52.5%;
-                background-color:green;
+                background-color:var(--button-main);
+                border:2px solid var(--button-edge);
+                color:var(--text);
                 font-size:500%;
                 float:left;
+                border-radius:50000000px;
+                font-family: 'Pixeboy', sans-serif;
             }
             #difficulty-display{
                 position:relative;
                 color:white;
-                top:10%;
-                left:-40%;
+                top:-14%;
+                left:0%;
                 float:left;
+                height:20%;
+                font-family: 'Pixeboy', sans-serif;
+                font-size:160%;
             }
             #gamemode-display{
                 position:relative;
                 color:white;
-                top:10%;
-                left:-30%;
+                top:-14%;
+                left:10%;
+                font-family: 'Common Pixel', sans-serif;
+                font-family: 'Pixeboy', sans-serif;
+                font-size:160%;
             }
             #countdown{
                 position:absolute;
@@ -83,6 +102,176 @@
                 font-size:200%;
                 color:white;
                 display:none;
+                font-family: 'Pixeboy', sans-serif;
+            }
+            #joystick-area{
+                position:absolute;
+                width:15%;
+                padding-bottom:15%;
+                border-radius:500000px;
+                background-color:rgba(200, 200, 200, 0.5);
+                left:75%;
+                top:42%;
+                display:none;
+                pointer-events: none;
+            }
+            #joystick{
+                position:absolute;
+                width:20%;
+                padding-bottom:20%;
+                border-radius:500000px;
+                background-color:rgba(160, 160, 160, 0.6);
+                left:50%;
+                top:50%;
+                display:none;
+                pointer-events:none;
+            }
+            #shield{
+                position:absolute;
+                left:2%;
+                top:42%;
+                width:20%;
+                height:25%;
+                background-color:rgba(25, 50, 250, 0.7);
+                display:none;
+                pointer-events: none;
+                text-align:center;
+            }
+            #easy{
+                background-color:var(--button-main);
+                border:2px solid var(--button-edge);
+                color:var(--text);
+                border-radius:700px;
+                outline:none;
+                font-family: 'Pixeboy', sans-serif;
+                font-size:155%;
+            }
+            #normal{
+                background-color:var(--button-main);
+                border:2px solid var(--button-edge);
+                color:var(--text);
+                border-radius:700px;
+                outline:none;
+                font-family: 'Pixeboy', sans-serif;
+                font-size:155%;
+            }
+            #hard{
+                background-color:var(--button-main);
+                border:2px solid var(--button-edge);
+                color:var(--text);
+                border-radius:700px;
+                outline:none;
+                font-family: 'Pixeboy', sans-serif;
+                font-size:155%;
+            }
+            #difficulty-select{
+                position:absolute;
+                left:45%;
+                width:59%;
+                height:80%;
+                top:10%;
+                /*background-color:rgba(0, 0, 0, 0);*/
+                font-family: 'Pixeboy', sans-serif;
+            }
+
+            #classic{
+                background-color:var(--button-main);
+                border:2px solid var(--button-edge);
+                color:var(--text);
+                border-radius:700px;
+                font-family: 'Pixeboy', sans-serif;
+                font-size:150%;
+                height:60%;
+            }
+            #survival{
+                background-color:var(--button-main);
+                border:2px solid var(--button-edge);
+                color:var(--text);
+                border-radius:700px;
+                font-family: 'Pixeboy', sans-serif;
+                height:60%;
+                font-size:150%;
+            }
+            #home{
+                padding-bottom:1%;
+                background-color:var(--button-main);
+                border:2px solid var(--button-edge);
+                color:var(--text);
+                border-radius:5000px;
+                font-size:200%;
+                text-align:center;
+                font-family: 'Pixeboy', sans-serif;
+            }
+            #sound{
+                position:absolute;
+                left:95%;
+                top:2%;
+                background-color:blue;
+                width:4%;
+                height:20%;
+            }
+            #sound-effects-on{
+                position:absolute;
+                left:85%;
+                top:5%;
+            }
+            #sfx-label{
+                position:absolute;
+                left:85.4%;
+                top:3%;
+                color:white;
+            }
+            #tutorial{
+                position:absolute;
+                left: 50%;
+                transform:translate(-50%, -50%);
+                top: 50.5%;
+                background-color:var(--button-main);
+                border:2px solid var(--button-edge);
+                color:var(--text);
+                font-size:500%;
+                float:left;
+                border-radius:500000px;
+                font-family: 'Pixeboy', sans-serif;
+            }
+            #tutorial-text{
+                position:absolute;
+                left:10%;
+                top:10%;
+                width:80%;
+                height:80%;
+                background-color:rgb(0, 11, 59, 0.8);
+                display:none;
+                pointer-events: none;
+                color:white;
+                font-size:200%;
+                border-radius:20px;
+                font-family: 'Pixeboy', sans-serif;
+            }
+            #mobile{
+                background-color:rgb(0, 10, 20);
+                position:absolute;
+                left:0;
+                top:0;
+                width:100%;
+                height:100%;
+            }
+            #mobile-title{
+                color:white;
+                text-align:center;
+                font-size:400%;
+                position:relative;
+                top:30%;
+            }
+            #mobile-text{
+                color:white;
+                text-align:center;
+                font-size:400%;
+                position:relative;
+                top:35%;
+            }
+            #gamemode-select{
+                height:50%;
             }
         </style>
         <div id = "ui">
@@ -100,17 +289,30 @@
             <p id = "gamemode-display">Classic</p>
         </div>
         <button id = "restart" onclick = "restart()">Start</button>
+        <button id = "tutorial" onclick = "tutorial()">Instructions</button>
         <p id = "countdown">60</p>
-        <canvas id = "main" onclick = "">
+        <div id = "shield" ontouchstart = "shieldUp(event)" ontouchend = "shieldDown(event)">shield<br>restart</div>
+            <input type = "checkbox"  value = "true" id = "sound-effects-on" checked = "checked"  onclick = "sfx(event)">
+            <label for = "sound-effects-on" id = "sfx-label">sound effects</label>
+        <canvas id = "main">
         
         </canvas>
-        <p>
-            <!--
-            WASD to move, space to destroy asteroids (red and yellow circles). red asteroids give 10 points when destroyed and shatter into smaller asteroids
-            golden (yellow) asteroids give 30 points and do not shatter. your shield power is the bar in the upper left which will go down when you hit space
-            and up when you don't, your score is also in the upper left. The green circles with a blue outline are unlimited shield power powerups. green 
-            circles with red outlines are an extra life which will appear in the lower left. The unlimited power bar is in the lower left
-            -->
-        </p>
+        <div id = "tutorial-text">
+            In bounce, you are playing an astronaut who has fallen out of a spaceship and has to
+            survive an asteroid field <img src = "Astronaut.png" style = "width:4%;height:7%;">. You use WASD to activate your jet pack to move around. 
+            Asteroids are the red and yellow circles bouncing around. Everything in this world
+            Bounces off the edge of the screen. If you hit an asteroid you will die immediately.
+            If you press space, you activate your shield and you can smash asteroids<img src = "redAsteroid.png" style = "width:4%;"> to gain 
+            points but your shield loses power as you use it and if it runs out, you can't use it 
+            until it recharges at least a little bit. The yellow asteroids are golden asteroids <img src = "yellowAsteroid.png" style = "width:4%">
+            and give 3X points and don't shatter to smaller pieces. The red and green circles 
+            are extra lives and the blue and green circles give you unlimited shield power for 
+            a limited time. Classic mode is unlimited, Survival is where you have to survive for
+            a minute then you win.
+        </div>
+        <div id = "mobile">
+            <h1 id = "mobile-title">Bounce</h1>
+            <p id = "mobile-text">This game does not support mobile, sorry :/</p>
+        </div>
     </body>
 </html> 

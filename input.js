@@ -98,7 +98,7 @@ function sfx(e){
 }
 
 function showMobile(){
-    if (navigator.userAgent.match(/Android/i)
+    /*if (navigator.userAgent.match(/Android/i)
                 || navigator.userAgent.match(/webOS/i)
                 || navigator.userAgent.match(/iPhone/i) 
                 || navigator.userAgent.match(/iPad/i) 
@@ -112,4 +112,5 @@ function showMobile(){
         document.getElementById("mobile").style.display = "none";
         document.getElementById("mobile").style.pointerEvents = "none";
     }
+    */
 }

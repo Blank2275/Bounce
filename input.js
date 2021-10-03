@@ -50,7 +50,26 @@ function keyUp(event){
 
 function resize(){
     var main = document.getElementById("main");
-    main.style.height = main.clientWidth / 2 + "px";
+    var width = document.body.clientWidth / 1.01;
+    var height = document.body.clientHeight / 1.01;
+    console.log(width);
+    console.log(height);
+    var maximumWidthForHorizontal = width;
+    var maximumWidthForVertical = height * 2;
+    var maximumWidth = Math.min(maximumWidthForHorizontal, maximumWidthForVertical);
+    main.style.width = maximumWidth + "px";
+    main.style.height = maximumWidth / 2 + "px";
+    /*if(height ){
+        // too wide
+        main.style.width = width + "px";
+        main.style.height = width / 2 + "px";
+    } else {
+        //too tall
+        main.style.height = height + "px";
+        main.style.width = 2 * height + "px";
+    }
+    */
+    //main.style.height = main.clientWidth / 2 + "px";
     showMobile();
 }
 
@@ -108,9 +127,7 @@ function showMobile(){
         document.getElementById("mobile").style.display = "block";
         document.getElementById("mobile").style.pointerEvents = "auto";
     }
-    else{
-        document.getElementById("mobile").style.display = "none";
-        document.getElementById("mobile").style.pointerEvents = "none";
-    }
     */
+    document.getElementById("mobile").style.display = "none";
+    document.getElementById("mobile").style.pointerEvents = "none";
 }
